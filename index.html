@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coquette Calculator 🎀</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ffd6e0);
+    }
+
+    .calculator {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+        width: 260px;
+        text-align: center;
+    }
+
+    .display {
+        width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        text-align: right;
+        padding: 10px;
+        font-size: 1.5em;
+        background: #fff0f5;
+        color: #d63384;
+        outline: none;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    button {
+        padding: 15px;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.1em;
+        cursor: pointer;
+        background: #ffe4ec;
+        color: #d63384;
+        transition: 0.2s;
+        box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+        background: #ffccd5;
+        transform: scale(1.05);
+    }
+
+    .equal {
+        background: #ff8fab;
+        color: white;
+    }
+
+    .equal:hover {
+        background: #ff5d8f;
+    }
+
+    .wide {
+        grid-column: span 4;
+        border-radius: 15px;
+    }
+
+    .footer {
+        margin-top: 10px;
+        font-size: 0.8em;
+        color: #d63384;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.4);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: #fff0f5;
+        padding: 20px;
+        border-radius: 20px;
+        text-align: center;
+        color: #d63384;
+        width: 250px;
+    }
+
+    .close {
+        margin-top: 10px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 10px;
+        background: #ff8fab;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+    <input type="text" class="display" id="display" disabled>
+
+    <div class="buttons">
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('+')">+</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('-')">-</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('*')">×</button>
+
+        <button onclick="showDeveloper()">A</button>
+        <button onclick="showApp()">B</button>
+        <button onclick="append('/')">÷</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+        <button class="wide" onclick="clearDisplay()">Clear ( ˘͈ ᵕ ˘͈♡)</button>
+    </div>
+
+    <div class="footer">(｡•ᴗ•｡)♡ Cute Calculator</div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content" id="modal-content"></div>
+</div>
+
+<script>
+    function append(value) {
+        document.getElementById("display").value += value;
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = "";
+    }
+
+    function calculate() {
+        try {
+            let result = eval(document.getElementById("display").value);
+            document.getElementById("display").value = result;
+        } catch {
+            document.getElementById("display").value = "Error (╥﹏╥)";
+        }
+    }
+
+    function showDeveloper() {
+        showModal("🌸 Developer 🌸<br><br>(｡•̀ᴗ-)✧ Made by YOU!<br>Creative & cute coder ♡");
+    }
+
+    function showApp() {
+        showModal("🎀 About App 🎀<br><br>This is a coquette-style calculator 💕<br>With extra buttons A & B! (≧◡≦)");
+    }
+
+    function showModal(text) {
+        document.getElementById("modal-content").innerHTML =
+            text + "<br><button class='close' onclick='closeModal()'>Close ♡</button>";
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
