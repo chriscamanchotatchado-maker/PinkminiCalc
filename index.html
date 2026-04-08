@@ -6,36 +6,31 @@
 <title>PinkCalc 🎀</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #ffe4ec, #ffc0cb, #ffb6c1);
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd6e0, #ffc0cb, #ffe4ec);
 }
 
-/* Calculator */
+/* Calculator container */
 .calculator {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+    border-radius: 25px;
+
     background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(20px);
-    padding: 25px;
-    border-radius: 28px;
-    width: 280px;
+    backdrop-filter: blur(15px);
 
-    /* Glow ambiance ✨ */
-    box-shadow:
-        0 0 25px rgba(255, 182, 193, 0.6),
-        0 10px 30px rgba(255, 105, 135, 0.3);
-
-    animation: float 4s ease-in-out infinite;
-}
-
-/* Floating effect */
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    box-shadow: 0 0 20px rgba(255,182,193,0.6);
 }
 
 /* Display */
@@ -43,74 +38,60 @@ body {
     width: 100%;
     height: 60px;
     border: none;
-    border-radius: 18px;
-    margin-bottom: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1.5em;
     text-align: right;
-    padding: 12px;
-    font-size: 1.6em;
+
     background: #fff5f8;
     color: #c9184a;
 
-    box-shadow:
-        inset 0 2px 6px rgba(0,0,0,0.1),
-        0 0 10px rgba(255,182,193,0.4);
-
-    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Buttons grid (perfect alignment) */
+/* Grid buttons */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
 /* Buttons */
 button {
-    aspect-ratio: 1 / 1; /* PERFECT CIRCLE SIZE */
-    border: none;
-    border-radius: 50%;
+    padding: 15px;
     font-size: 1.1em;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
 
-    background: linear-gradient(145deg, #ffe4ec, #ffd6e0);
+    background: #ffe4ec;
     color: #c9184a;
 
-    /* Glow buttons ✨ */
-    box-shadow:
-        0 0 10px rgba(255,182,193,0.6),
-        4px 4px 10px rgba(0,0,0,0.1),
-        -4px -4px 10px rgba(255,255,255,0.7);
-
-    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: 0.2s;
 }
 
-button:hover {
-    transform: scale(1.08);
-    box-shadow:
-        0 0 15px rgba(255,105,135,0.😎,
-        0 0 25px rgba(255,182,193,0.6);
+button:active {
+    transform: scale(0.95);
 }
 
-/* Equal button */
+/* Equal */
 .equal {
-    background: linear-gradient(145deg, #ff8fab, #ff5d8f);
+    background: #ff8fab;
     color: white;
 }
 
-/* Wide clear button */
+/* Clear button */
 .wide {
     grid-column: span 4;
-    border-radius: 15px;
-    aspect-ratio: unset;
-    height: 45px;
 }
 
 /* Footer */
 .footer {
-    margin-top: 12px;
-    font-size: 0.8em;
+    margin-top: 10px;
     text-align: center;
+    font-size: 0.8em;
     color: #c9184a;
 }
 
@@ -128,14 +109,11 @@ button:hover {
 .modal-content {
     background: #fff0f5;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     text-align: center;
+    width: 90%;
+    max-width: 280px;
     color: #c9184a;
-    width: 260px;
-
-    box-shadow:
-        0 0 20px rgba(255,182,193,0.6),
-        0 10px 25px rgba(0,0,0,0.2);
 }
 
 .close {
@@ -145,7 +123,6 @@ button:hover {
     border-radius: 10px;
     background: #ff8fab;
     color: white;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -179,7 +156,7 @@ button:hover {
         <button class="wide" onclick="clearDisplay()">Clear (｡•ᴗ•｡)♡</button>
     </div>
 
-    <div class="footer">PinkCalc 🎀 (˶ᵔ ᵕ ᵔ˶)</div>
+    <div class="footer">PinkCalc 🎀</div>
 </div>
 
 <!-- Modal -->
@@ -198,10 +175,10 @@ function clearDisplay() {
 
 function calculate() {
     try {
-        let result = eval(document.getElementById("display").value);
-        document.getElementById("display").value = result;
+        document.getElementById("display").value =
+            eval(document.getElementById("display").value);
     } catch {
-        document.getElementById("display").value = "Error (╥﹏╥)";
+        document.getElementById("display").value = "Error";
     }
 }
 
@@ -209,25 +186,22 @@ function showDeveloper() {
     showModal(`
         🎀 Developer 🎀<br><br>
         <b>Chrisjane Tatchado</b><br>
-        ✧ username: chriscamanchotatchado-maker<br>
-        ✧ Student at MSU Buug<br><br>
-        (｡•̀ᴗ-)✧ cute coder ♡
+        username: chriscamanchotatchado-maker<br>
+        Student at MSU Buug
     `);
 }
 
 function showApp() {
     showModal(`
-        💖 About This App 💖<br><br>
-        A coquette-style calculator 🎀<br>
-        Soft pink aesthetic + glowing UI ✨<br>
-        Includes special buttons A & B!<br><br>
-        (≧◡≦) ♡
+        💖 About App 💖<br><br>
+        Simple pink calculator 🎀<br>
+        With A & B info buttons ✨
     `);
 }
 
 function showModal(text) {
     document.getElementById("modal-content").innerHTML =
-        text + "<br><button class='close' onclick='closeModal()'>Close ♡</button>";
+        text + "<br><button class='close' onclick='closeModal()'>Close</button>";
     document.getElementById("modal").style.display = "flex";
 }
 
